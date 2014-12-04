@@ -6,12 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 public class GUI extends JFrame{
 
 	private static final long serialVersionUID = 63895785266111154L;
-	private JTextArea InputArea;
-    private JTextArea OutputArea;
+	
+	private JTextArea input;
+    private JTextArea output;
     private JPanel jPanel;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
@@ -22,11 +24,11 @@ public class GUI extends JFrame{
 	
 	private void initComponents() {
 
-        jPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        OutputArea = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        InputArea = new javax.swing.JTextArea();
+        jPanel = new JPanel();
+        jScrollPane1 = new JScrollPane();
+        output = new JTextArea();
+        jScrollPane2 = new JScrollPane();
+        input = new JTextArea();
 
         setTitle("Pinyin Extensible Editor");
 		setSize(800, 500);
@@ -34,17 +36,18 @@ public class GUI extends JFrame{
 		setResizable(false); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        OutputArea.setColumns(20);
-        jScrollPane1.setViewportView(OutputArea);
+		output.setColumns(20);
+		output.setEditable(false);
+        jScrollPane1.setViewportView(output);
 
-        InputArea.setColumns(20);
-        jScrollPane2.setViewportView(InputArea);
+        input.setColumns(20);
+        jScrollPane2.setViewportView(input);
 
         GroupLayout jPanelLayout = new GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(Alignment.LEADING)
-            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(jPanelLayout.createParallelGroup(Alignment.LEADING)
                 .addComponent(jScrollPane2))
         );
@@ -60,6 +63,8 @@ public class GUI extends JFrame{
                     .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                     ))
         );
+        
+        
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,7 +76,11 @@ public class GUI extends JFrame{
             layout.createParallelGroup()
             .addComponent(jPanel)
         );
-
+        
+        input.setLineWrap(true);
+        output.setLineWrap(true);
+        jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         pack();
     }
 }
