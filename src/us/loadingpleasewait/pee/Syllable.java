@@ -17,19 +17,31 @@ public class Syllable extends PinyinString {
 	 */
 	@Override
 	public String getPinyin() {
-		/*
-		 * add combining diacritical marks after vowels for tone marks
-		 */
-		char vowel = getInput().charAt(getInput().replace("[aeiou]", "\\0").indexOf("\\0"));
+		// find out which vowel to put a tone on
+		char vowel;
+		if(getInput().contains("a")){
+			vowel = 'a';
+		}else if(getInput().contains("e")){
+			vowel = 'e';
+		}else if(getInput().contains("i")){
+			vowel = 'i';
+		}else if(getInput().contains("o")){
+			vowel = 'o';
+		}else if(getInput().contains("u")){
+			vowel = 'u';
+		}else{
+			return getInput();// no vowel no tone mark
+		}
+		// add combining diacritical marks after vowels for tone marks
 		switch(getInput().charAt(getInput().length()-1)){
 		case '1':
-			return getInput().replace("" + vowel, vowel + "" + 0x0304);
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x0304).substring(0, getInput().length());
 		case '2':
-			return getInput().replace("" + vowel, vowel + "" + 0x0301);
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x0301).substring(0, getInput().length());
 		case '3':
-			return getInput().replace("" + vowel, vowel + "" + 0x030C);
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x030C).substring(0, getInput().length());
 		case '4':
-			return getInput().replace("" + vowel, vowel + "" +0x0300);
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x0300).substring(0, getInput().length());
 		default:
 			return getInput();
 		}
