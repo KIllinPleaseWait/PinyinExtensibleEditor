@@ -1,5 +1,8 @@
 package us.loadingpleasewait.pee;
 
+import java.awt.GraphicsConfiguration;
+import java.awt.HeadlessException;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
@@ -18,11 +21,37 @@ public class GUI extends JFrame{
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
 
+	/**
+	 * Just a default constructor
+	 */
 	public GUI() {
-        initComponents();
+        
     }
 	
-	private void initComponents() {
+	/**
+	 * @param gc
+	 */
+	public GUI(GraphicsConfiguration gc) {
+		super(gc);
+	}
+
+	/**
+	 * @param title
+	 * @param gc
+	 */
+	public GUI(String title, GraphicsConfiguration gc) {
+		super(title, gc);
+	}
+
+	/**
+	 * @param title
+	 * @throws HeadlessException
+	 */
+	public GUI(String title) throws HeadlessException {
+		super(title);
+	}
+
+	public void initComponents() {
 
         jPanel = new JPanel();
         jScrollPane1 = new JScrollPane();
@@ -83,4 +112,74 @@ public class GUI extends JFrame{
         jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         pack();
     }
+
+	/**
+	 * @return the input
+	 */
+	protected JTextArea getInput() {
+		return input;
+	}
+
+	/**
+	 * @param input the input to set
+	 */
+	protected void setInput(JTextArea input) {
+		this.input = input;
+	}
+
+	/**
+	 * @return the output
+	 */
+	protected JTextArea getOutput() {
+		return output;
+	}
+
+	/**
+	 * @param output the output to set
+	 */
+	protected void setOutput(JTextArea output) {
+		this.output = output;
+	}
+
+	/**
+	 * @return the jPanel
+	 */
+	protected JPanel getjPanel() {
+		return jPanel;
+	}
+
+	/**
+	 * @param jPanel the jPanel to set
+	 */
+	protected void setjPanel(JPanel jPanel) {
+		this.jPanel = jPanel;
+	}
+
+	/**
+	 * @return the jScrollPane1
+	 */
+	protected JScrollPane getjScrollPane1() {
+		return jScrollPane1;
+	}
+
+	/**
+	 * @param jScrollPane1 the jScrollPane1 to set
+	 */
+	protected void setjScrollPane1(JScrollPane jScrollPane1) {
+		this.jScrollPane1 = jScrollPane1;
+	}
+
+	/**
+	 * @return the jScrollPane2
+	 */
+	protected JScrollPane getjScrollPane2() {
+		return jScrollPane2;
+	}
+
+	/**
+	 * @param jScrollPane2 the jScrollPane2 to set
+	 */
+	protected void setjScrollPane2(JScrollPane jScrollPane2) {
+		this.jScrollPane2 = jScrollPane2;
+	}
 }
