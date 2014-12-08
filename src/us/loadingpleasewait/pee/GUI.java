@@ -2,6 +2,7 @@ package us.loadingpleasewait.pee;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.awt.event.FocusListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -112,6 +113,30 @@ public class GUI extends JFrame{
         jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         pack();
     }
+	
+	/**
+	 * Adds the specified focus listener to receive focus events from the input textfield
+	 * @param listener the focus listener to be added
+	 */
+	public void addInputFocusListener(FocusListener listener){
+		input.addFocusListener(listener);
+	}
+	
+	/**
+	 * set the text of the output text area
+	 * @param text text that to put in the output text area
+	 */
+	public void setOutputText(String text){
+		output.setText(text);
+	}
+	
+	/**
+	 * get the input text
+	 * @return the text in the input text area
+	 */
+	public String getInputText(){
+		return input.getText();
+	}
 
 	/**
 	 * @return the input
