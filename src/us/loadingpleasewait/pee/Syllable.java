@@ -28,22 +28,30 @@ public class Syllable extends PinyinString {
 		}else if(getInput().contains("o")){
 			vowel = 'o';
 		}else if(getInput().contains("u")){
-			vowel = 'u';
+			if(getInput().charAt(getInput().length()-1) >= '5'){
+				// add 5 to tone number to use u with umlaut
+				vowel = 'ü';
+				setInput(getInput().substring(0, getInput().length()-1) + (char)(getInput().charAt(getInput().length()-1) - 5));
+				setInput(getInput().replace('u', vowel));
+			}else{
+				vowel = 'u';
+			}
 		}else{
 			return getInput();// no vowel no tone mark
 		}
+		
 		// add combining diacritical marks after vowels for tone marks
 		switch(getInput().charAt(getInput().length()-1)){
 		case '1':
-			return getInput().replace("" + vowel, vowel + "" + (char) 0x0304).substring(0, getInput().length());
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x0304).substring(0, getInput().length());// flat tone
 		case '2':
-			return getInput().replace("" + vowel, vowel + "" + (char) 0x0301).substring(0, getInput().length());
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x0301).substring(0, getInput().length());// upward tone
 		case '3':
-			return getInput().replace("" + vowel, vowel + "" + (char) 0x030C).substring(0, getInput().length());
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x030C).substring(0, getInput().length());// v tone
 		case '4':
-			return getInput().replace("" + vowel, vowel + "" + (char) 0x0300).substring(0, getInput().length());
+			return getInput().replace("" + vowel, vowel + "" + (char) 0x0300).substring(0, getInput().length());// downward tone
 		default:
-			return getInput();
+			return getInput();// no valid tone number
 		}
 	}
 
