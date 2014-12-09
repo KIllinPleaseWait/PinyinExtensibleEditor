@@ -23,7 +23,11 @@ public class Word extends PinyinString {
 		// split up each syllable and then put the string back together
 		String output = "";
 		for(String letters : getInput().split("\\d")){
-			output += new Syllable(getInput().substring(getInput().indexOf(letters), getInput().indexOf(letters) + letters.length() + 1).toLowerCase());
+			try{
+				output += new Syllable(getInput().substring(getInput().indexOf(letters), getInput().indexOf(letters) + letters.length() + 1).toLowerCase());
+			}catch(StringIndexOutOfBoundsException ex){
+				output += letters;// no pinyin to convert
+			}
 		}
 		// capitalize first letter if it is capitalized in the input
 		String firstLetter = getInput().substring(0, 1);
