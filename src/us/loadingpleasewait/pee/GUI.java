@@ -1,7 +1,9 @@
 package us.loadingpleasewait.pee;
 
+import java.awt.Font;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.awt.Insets;
 import java.awt.event.FocusListener;
 
 import javax.swing.GroupLayout;
@@ -11,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 
 public class GUI extends JFrame{
 
@@ -21,6 +24,7 @@ public class GUI extends JFrame{
     private JPanel jPanel;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
+    private Font font;
 
 	/**
 	 * Just a default constructor
@@ -54,13 +58,15 @@ public class GUI extends JFrame{
 
 	public void initComponents() {
 
+		UIManager.put("TextArea.margin", new Insets(10,10,10,10));
         jPanel = new JPanel();
         jScrollPane1 = new JScrollPane();
         output = new JTextArea();
         jScrollPane2 = new JScrollPane();
         input = new JTextArea();
+        font = new Font(Font.SANS_SERIF, Font.PLAIN , 20);
 
-        setTitle("Pinyin Extensible Editor");
+        setTitle("PinyinExtensibleEditor");
 		setSize(800, 500);
 		setVisible(true);
 		setResizable(false); 
@@ -68,9 +74,11 @@ public class GUI extends JFrame{
 
 		output.setColumns(20);
 		output.setEditable(false);
+		output.setFont(font);
         jScrollPane1.setViewportView(output);
 
         input.setColumns(20);
+        input.setFont(font);
         jScrollPane2.setViewportView(input);
 
         GroupLayout jPanelLayout = new GroupLayout(jPanel);
