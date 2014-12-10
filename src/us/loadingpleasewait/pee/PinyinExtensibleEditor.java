@@ -47,9 +47,15 @@ public class PinyinExtensibleEditor implements Serializable {
 	 */
 	public void convertInputToPinyin(){
 		String[] input = graphics.getInputText().split("\\s");
+		String unprocessedInput = graphics.getInputText();// will get shortened as each part is processed
 		String output = "";
 		for(String word : input){
-			output += new Word(word).getPinyin() + " ";
+			output += new Word(word).getPinyin();
+			unprocessedInput = unprocessedInput.replace(word, "");
+			if(!unprocessedInput.isEmpty()){
+				output += unprocessedInput.charAt(0);
+				unprocessedInput = unprocessedInput.substring(1);// add back in the whitespace
+			}
 		}
 		graphics.setOutputText(output);
 	}
