@@ -4,7 +4,13 @@ import java.awt.Font;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -14,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
+
+import com.sun.glass.events.MouseEvent;
 
 public class GUI extends JFrame{
 
@@ -74,6 +82,42 @@ public class GUI extends JFrame{
 
 		output.setColumns(20);
 		output.setEditable(false);
+		output.addMouseListener(new MouseListener(){
+			/**
+			 * @param Copies text to clipboard when you click at the output textArea
+			 */
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				String text = output.getText();
+				StringSelection stringSelection = new StringSelection (text);
+				Clipboard clpbrd = Toolkit.getDefaultToolkit ().getSystemClipboard ();
+				clpbrd.setContents (stringSelection, null);				
+			}
+
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		output.setFont(font);
         jScrollPane1.setViewportView(output);
 
@@ -215,4 +259,6 @@ public class GUI extends JFrame{
 	protected void setjScrollPane2(JScrollPane jScrollPane2) {
 		this.jScrollPane2 = jScrollPane2;
 	}
+
+	
 }
