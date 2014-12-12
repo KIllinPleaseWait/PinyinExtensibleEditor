@@ -7,19 +7,31 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.Document;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 
 public class GUI extends JFrame {
 
@@ -31,6 +43,7 @@ public class GUI extends JFrame {
 	private JScrollPane jScrollPane1;
 	private JScrollPane jScrollPane2;
 	private Font font;
+	private UndoManager undo;
 
 	/**
 	 * Just a default constructor
@@ -74,6 +87,7 @@ public class GUI extends JFrame {
 		jScrollPane2 = new JScrollPane();
 		input = new JTextArea();
 		font = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
+		undo = new UndoManager();
 
 		setTitle("PinyinExtensibleEditor");
 		setSize(800, 500);
@@ -136,6 +150,47 @@ public class GUI extends JFrame {
 		input.setColumns(20);
 		input.setFont(font);
 		jScrollPane2.setViewportView(input);
+		
+		Document doc = input.getDocument();
+		doc.addUndoableEditListener(new UndoableEditListener() {
+		    @Override
+		    public void undoableEditHappened(UndoableEditEvent e) {
+		        undo.addEdit(e.getEdit());
+		    }
+		});
+
+		InputMap inputMap = input.getInputMap(JComponent.WHEN_FOCUSED);
+		ActionMap actionMap = input.getActionMap();
+
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Undo");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
+
+		actionMap.put("Undo", new AbstractAction() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+		            if (undo.canUndo()) {
+		                undo.undo();
+		            }
+		        } catch (CannotUndoException exp) {
+		            exp.printStackTrace();
+		        }
+				
+			}
+		});
+		actionMap.put("Redo", new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            if (undo.canRedo()) {
+		                undo.redo();
+		            }
+		        } catch (CannotUndoException exp) {
+		            exp.printStackTrace();
+		        }
+		    }
+		});
 
 		GroupLayout jPanelLayout = new GroupLayout(jPanel);
 		jPanel.setLayout(jPanelLayout);
