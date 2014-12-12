@@ -40,23 +40,26 @@ public class GUI extends JFrame {
 	}
 
 	/**
-	 * @param gc
+	 * Just calls super
+	 * @param gc the GraphicsConfiguration
 	 */
 	public GUI(GraphicsConfiguration gc) {
 		super(gc);
 	}
 
 	/**
-	 * @param title
-	 * @param gc
+	 * Just calls super
+	 * @param title the title
+	 * @param gc the GraphicsConfiguration
 	 */
 	public GUI(String title, GraphicsConfiguration gc) {
 		super(title, gc);
 	}
 
 	/**
-	 * @param title
-	 * @throws HeadlessException
+	 * Just calls super
+	 * @param title the title
+	 * @throws HeadlessException if graphics configuration is headless
 	 */
 	public GUI(String title) throws HeadlessException {
 		super(title);  
@@ -83,10 +86,8 @@ public class GUI extends JFrame {
 		DefaultCaret caret = (DefaultCaret)output.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		output.addMouseListener(new MouseListener() {
-			/**
-			 * @param Copies
-			 *            text to clipboard when you click at the output
-			 *            textArea
+			/* (non-Javadoc)
+			 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 			 */
 			@Override
 			public void mouseClicked(MouseEvent event) {
@@ -97,21 +98,33 @@ public class GUI extends JFrame {
 				clpbrd.setContents(stringSelection, null);
 			}
 
+			/* (non-Javadoc)
+			 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+			 */
 			@Override
 			public void mousePressed(MouseEvent event) {
 
 			}
 
+			/* (non-Javadoc)
+			 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+			 */
 			@Override
 			public void mouseReleased(MouseEvent event) {
 
 			}
 
+			/* (non-Javadoc)
+			 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+			 */
 			@Override
 			public void mouseEntered(MouseEvent event) {
 
 			}
 
+			/* (non-Javadoc)
+			 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+			 */
 			@Override
 			public void mouseExited(MouseEvent event) {
 

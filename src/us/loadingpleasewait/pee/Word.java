@@ -20,14 +20,16 @@ public class Word extends PinyinString {
 	public String getPinyin() {
 		if(getInput().replaceAll("\\d", "").equals(getInput()) || getInput().replaceAll("\\d", "").isEmpty())
 			return getInput();//just return input if the input is all numbers or no numbers
+		String unprocessedInput = getInput();
 		// split up each syllable and then put the string back together
 		String output = "";
 		for(String letters : getInput().split("\\d")){
 			try{
-				output += new Syllable(getInput().substring(getInput().indexOf(letters), getInput().indexOf(letters) + letters.length() + 1).toLowerCase());
+				output += new Syllable(unprocessedInput.substring(unprocessedInput.indexOf(letters), unprocessedInput.indexOf(letters) + letters.length() + 1).toLowerCase());
 			}catch(StringIndexOutOfBoundsException ex){
 				output += letters;// no pinyin to convert
 			}
+			unprocessedInput = unprocessedInput.replace(letters, "");
 		}
 		// capitalize first letter if it is capitalized in the input
 		String firstLetter = getInput().substring(0, 1);
