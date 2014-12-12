@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
+import javax.swing.text.DefaultCaret;
 
 public class GUI extends JFrame {
 
@@ -58,7 +59,7 @@ public class GUI extends JFrame {
 	 * @throws HeadlessException
 	 */
 	public GUI(String title) throws HeadlessException {
-		super(title);
+		super(title);  
 	}
 
 	public void initComponents() {
@@ -79,6 +80,8 @@ public class GUI extends JFrame {
 
 		output.setColumns(20);
 		output.setEditable(false);
+		DefaultCaret caret = (DefaultCaret)output.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		output.addMouseListener(new MouseListener() {
 			/**
 			 * @param Copies
