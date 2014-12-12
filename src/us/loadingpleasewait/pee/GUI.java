@@ -153,9 +153,12 @@ public class GUI extends JFrame {
 		
 		Document doc = input.getDocument();
 		doc.addUndoableEditListener(new UndoableEditListener() {
+		    /* (non-Javadoc)
+		     * @see javax.swing.event.UndoableEditListener#undoableEditHappened(javax.swing.event.UndoableEditEvent)
+		     */
 		    @Override
-		    public void undoableEditHappened(UndoableEditEvent e) {
-		        undo.addEdit(e.getEdit());
+		    public void undoableEditHappened(UndoableEditEvent event) {
+		        undo.addEdit(event.getEdit());
 		    }
 		});
 
@@ -167,8 +170,13 @@ public class GUI extends JFrame {
 
 		actionMap.put("Undo", new AbstractAction() {
 
+			private static final long serialVersionUID = -6423096995199182203L;
+
+			/* (non-Javadoc)
+			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 */
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				try {
 		            if (undo.canUndo()) {
 		                undo.undo();
@@ -180,8 +188,14 @@ public class GUI extends JFrame {
 			}
 		});
 		actionMap.put("Redo", new AbstractAction() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
+
+			private static final long serialVersionUID = -899655610183011824L;
+
+			/* (non-Javadoc)
+			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 */
+			@Override
+		    public void actionPerformed(ActionEvent event) {
 		        try {
 		            if (undo.canRedo()) {
 		                undo.redo();
