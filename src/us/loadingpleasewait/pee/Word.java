@@ -5,10 +5,17 @@ public class Word extends PinyinString {
 	
 	private static final long serialVersionUID = 33515391726789689L;
 	
+	/**
+	 * Sets the input as empty
+	 */
 	public Word(){
 		super("");
 	}
 	
+	/**
+	 * Calls super to set the input
+	 * @param input the input string
+	 */
 	public Word(String input) {
 		super(input);
 	}

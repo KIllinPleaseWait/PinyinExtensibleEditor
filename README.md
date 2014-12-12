@@ -3,12 +3,14 @@ PinyinExtensibleEditor
 
 The PinyinExtensibleEditor or PEE allows users to input pinyin on a normal keyboard.
 
+[Download the executable JAR file here!](https://github.com/KIllinPleaseWait/PinyinExtensibleEditor/releases/download/v1.0/PinyinExtensibleEditor.jar)
+
 ### Usage
 
 Simply type pinyin with the tone number in the top text area and the pinyin will show 
 up in the bottom text area. For example, pin1yin1 would turn into pīnyīn. If you want
 to type a u with an umlaut and a tone mark then you can add 5 to the tone number. So 
-yu7 would turn into yǘ.
+nu8 would turn into nǚ.
 
 ### License
 

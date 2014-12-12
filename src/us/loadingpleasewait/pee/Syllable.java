@@ -4,10 +4,17 @@ public class Syllable extends PinyinString {
 	
 	private static final long serialVersionUID = 7226678250347009023L;
 
+	/**
+	 * Sets the input as empty
+	 */
 	public Syllable() {
 		super("");
 	}
 	
+	/**
+	 * Calls super to set the input
+	 * @param input the input string
+	 */
 	public Syllable(String input) {
 		super(input);
 	}
@@ -19,9 +26,9 @@ public class Syllable extends PinyinString {
 	public String getPinyin() {
 		// find out which vowel to put a tone on
 		char vowel;
-		if(getInput().contains("a")){
+		if(getInput().contains("a") && getInput().charAt(getInput().length()-1) < '5'){
 			vowel = 'a';
-		}else if(getInput().contains("e")){
+		}else if(getInput().contains("e") && getInput().charAt(getInput().length()-1) < '5'){
 			vowel = 'e';
 		}else if(getInput().contains("i")){
 			vowel = 'i';
@@ -33,6 +40,10 @@ public class Syllable extends PinyinString {
 				vowel = 'ü';
 				setInput(getInput().substring(0, getInput().length()-1) + (char)(getInput().charAt(getInput().length()-1) - 5));
 				setInput(getInput().replace('u', vowel));
+				
+				if(getInput().charAt(getInput().length()-1) == '0')
+					setInput(getInput().substring(0, getInput().length() - 1));// don't leave a 0
+				
 			}else{
 				vowel = 'u';
 			}
